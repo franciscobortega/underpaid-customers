@@ -31,7 +31,25 @@ def validate_customer_payments(customer, melons, total_paid):
         print(f"{customer} paid ${total_paid:.2f},",
             f"expected ${total_expected:.2f}"
             )
-    
+        
+def parse_file(file):
+
+    input_file = open(file)
+
+    for line in input_file:
+        line = line.rstrip()
+
+        words = line.split("|")
+
+        customer = words[1]
+        melons = int(words[2])
+        paid = float(words[3])
+
+        validate_customer_payments(customer, melons, paid)
+
+    input_file.close()
+
+parse_file("customer-orders.txt")
 
 validate_customer_payments(customer1_name, customer1_melons, customer1_paid)
 validate_customer_payments(customer2_name, customer2_melons, customer2_paid)
