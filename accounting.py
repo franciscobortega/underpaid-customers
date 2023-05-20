@@ -1,59 +1,33 @@
-MELON_COST = 1.00
-
-customer1_name = "Joe"
-customer1_melons = 5
-customer1_paid = 5.00
-
-customer2_name = "Frank"
-customer2_melons = 6
-customer2_paid = 6.00
-
-customer3_name = "Sally"
-customer3_melons = 3
-customer3_paid = 3.00
-
-customer4_name = "Sean"
-customer4_melons = 9
-customer4_paid = 9.50
-
-customer5_name = "David"
-customer5_melons = 4
-customer5_paid = 4.00
-
-customer6_name = "Ashley"
-customer6_melons = 3
-customer6_paid = 2.00
+MELON_COST = 1.00 # global variable for cost of 1 melon
 
 def validate_customer_payments(customer, melons, total_paid):
     """Prints our information for customers who overpaid or underpaid"""
+    # determine expected amount based on melons bought and cost per melon
     total_expected = melons * MELON_COST
+    # provide output for customers who paid an amount different from the expected amount
     if total_expected != total_paid:
         print(f"{customer} paid ${total_paid:.2f},",
-            f"expected ${total_expected:.2f}"
-            )
+            f"expected ${total_expected:.2f}")
         
 def parse_file(file):
-
+    """Opens file and parses each line using data from each line as arguments for validate_customer_payments function"""
+    # opens input file
     input_file = open(file)
 
+    # loop through each line in the file
     for line in input_file:
-        line = line.rstrip()
+        line = line.rstrip()    # remove whitespace after end of right side of line
+        words = line.split("|") # list is built from each line using '|' as a delimiter
 
-        words = line.split("|")
-
+        # assign values from list to respective variable
         customer = words[1]
         melons = int(words[2])
         paid = float(words[3])
 
+        # calls function using variables as arguments to check if customer underpaid or overpaid
         validate_customer_payments(customer, melons, paid)
 
+    # close file once done
     input_file.close()
 
 parse_file("customer-orders.txt")
-
-validate_customer_payments(customer1_name, customer1_melons, customer1_paid)
-validate_customer_payments(customer2_name, customer2_melons, customer2_paid)
-validate_customer_payments(customer3_name, customer3_melons, customer3_paid)
-validate_customer_payments(customer4_name, customer4_melons, customer4_paid)
-validate_customer_payments(customer5_name, customer5_melons, customer5_paid)
-validate_customer_payments(customer6_name, customer6_melons, customer6_paid)
