@@ -9,6 +9,14 @@ def validate_customer_payments(customer, melons, total_paid):
         print(f"{customer} paid ${total_paid:.2f},",
             f"expected ${total_expected:.2f}")
         
+        # ternary operator for checking if a customer overpaid or underpaid
+        payment_status = "overpaid" if total_expected < total_paid else "underpaid"
+
+        first_name = customer.split(" ")[0] # isolate first name from customer parameter
+
+        # output statement stating whether customer overpaid or underpaid
+        print(f"  !--{first_name} has {payment_status} for their melons.--!")
+        
 def parse_file(file):
     """Opens file and parses each line using data from each line as arguments for validate_customer_payments function"""
     # opens input file
